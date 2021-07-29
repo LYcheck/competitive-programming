@@ -3,8 +3,8 @@ using namespace std;
 
 int main() {
     string key, s, ans;
-    cin >> key;
-    cin >> s;
+    getline(cin, key);
+    getline(cin, s);
     ans = "";
     
     int keyLen, sLen, keyLeft, sLeft, shift;
