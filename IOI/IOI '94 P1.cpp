@@ -2,32 +2,26 @@
 
 using namespace std;
 
-#define arr array
 #define ll long long
 
-ll temp[105];
-ll fin[105];
+ll arr[105][105];
 int main() {
-    memset(temp, 0, sizeof(temp));
-    memset(fin, 0, sizeof(fin));
+    memset(arr, 0, sizeof(arr));
     int n;
     cin >> n;
-    
-    for(int i = 1; i <= n; i++){
-        for(int j = 0; j < i; j++) cin >> temp[j];
 
-        fin[0] += temp[0];
-
-        fin[i] = temp[i-1];  
-
-        
-        for(int k = 1; k < i-1; k++){
-            fin[k] += max(temp[k-1], temp[k]);
+    for(int i = 0; i <= n; i++){
+        for(int j = 0; j < i; j++){
+            cin >> arr[i][j];
         }
     }
 
-    int nmax = -1;
-    for(int a = 0; a < n; a++) if(fin[a] > nmax) nmax = fin[a];
-
-    cout << nmax;
+    for(int i = n-1; i > -1; i--){
+        if(i == 0) cout << arr[0][0] + max(arr[1][0], arr[1][1]);
+        else{
+            for(int j = 0; j <= i; j++){
+                arr[i][j] += max(arr[i+1][j], arr[i+1][j+1]);
+            }
+        }
+    }
 }
