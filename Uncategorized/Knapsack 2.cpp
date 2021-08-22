@@ -7,7 +7,7 @@ using namespace std;
 
 ll weights[105];
 ll vals[105];
-ll dp[1000005];
+ll dp[1000000050];
 int main() {
     memset(dp, 0, sizeof(dp));
     unsigned long long N, W;
