@@ -5,18 +5,15 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
         stk = []
-        prev = None
         
         while root or stk:
             while root:
                 stk.append(root)
                 root = root.left
-                
+            
             root = stk.pop()
-            if prev and prev.val >= root.val: return False # checks uniquity aswell
-            prev = root
+            k -= 1
+            if not k: return root.val
             root = root.right
-        
-        return True
