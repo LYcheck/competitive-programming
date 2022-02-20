@@ -20,3 +20,16 @@ class Solution:
             minprefix = min(nums[j], minprefix)
         
         return res
+
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        n = len(nums)
+        dp = [0]*n
+        dp[0] = nums[0]
+        best = dp[0]
+        
+        for i in range(1, n):
+            dp[i] = nums[i] + dp[i-1] if dp[i-1] > 0 else nums[i]
+            best = max(best, dp[i])
+            
+        return best
