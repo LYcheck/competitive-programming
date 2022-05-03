@@ -6,34 +6,17 @@
 #         self.right = right
 class Solution:
     def sumEvenGrandparent(self, root: TreeNode) -> int:
-        leafsum = 0
+        res = 0
         
-        def add(left, right):
-            nonlocal leafsum
+        def dfs(cur, parent, grandparent):
+            if not cur: return
             
-            if left:
-                if left.left:
-                    leafsum += left.left.val
-                if left.right:
-                    leafsum += left.right.val
-            if right:
-                if right.left:
-                    leafsum += right.left.val
-                if right.right:
-                    leafsum += right.right.val
-                    
-        
-        def recurse(root):
-            if not (root.val & 1):
-                add(root.left, root.right)
+            if grandparent and not grandparent.val & 1:
+                nonlocal res
+                res += cur.val
                 
-            if root.left:
-                recurse(root.left)
-            if root.right:
-                recurse(root.right)
+            dfs(cur.left, cur, parent)
+            dfs(cur.right, cur, parent)
             
-            return
-        
-        recurse(root)
-        
-        return leafsum
+        dfs(root, None, None)
+        return res
